@@ -1,30 +1,34 @@
 const todoList = () => {
-  all = [];
+  const all = [];
+
   const add = (todoItem) => {
     all.push(todoItem);
   };
+
   const markAsComplete = (index) => {
     all[index].completed = true;
   };
 
   const overdue = () => {
-    return all.filter((todo) => todo.dueDate < today);
+    const todayDate = new Date(today);
+    return all.filter((todo) => new Date(todo.dueDate) < todayDate);
   };
 
   const dueToday = () => {
-    return all.filter((todo) => todo.dueDate == today);
+    const todayDate = new Date(today);
+    return all.filter((todo) => new Date(todo.dueDate).toDateString() === todayDate.toDateString());
   };
 
   const dueLater = () => {
-    return all.filter((todo) => todo.dueDate > today);
+    const todayDate = new Date(today);
+    return all.filter((todo) => new Date(todo.dueDate) > todayDate);
   };
 
   const toDisplayableList = (list) => {
     return list
       .map(
         (todo) =>
-          `${todo.completed ? "[x]" : "[ ]"} ${todo.title} ${todo.dueDate == today ? "" : todo.dueDate
-          }`
+          `${todo.completed ? "[x]" : "[ ]"} ${todo.title} ${todo.dueDate === today ? "" : todo.dueDate}`
       )
       .join("\n");
   };
@@ -39,6 +43,8 @@ const todoList = () => {
     toDisplayableList,
   };
 };
+
+// Rest of the code remains unchanged
 
 // ####################################### #
 // DO NOT CHANGE ANYTHING BELOW THIS LINE. #
