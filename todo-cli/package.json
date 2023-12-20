@@ -1,16 +1,8 @@
 {
-  "name": "wd201",
-  "version": "1.0.0",
-  "description": "",
-  "main": "todo.js",
-  "scripts": {
-    "test": "jest",
-    "prepare": "husky install"
+  "dependencies": {
+    "jest": "^29.0.2"
   },
-  "author": "Vineeth",
-  "license": "ISC",
-  "devDependencies": {
-    "husky": "^8.0.1",
-    "jest": "^29.0.3"
+  "scripts": {
+    "test": "jest --json --outputFile=results.json"
   }
 }

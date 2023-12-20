@@ -1,36 +1,40 @@
+// __tests__/todo.js
 let todoList = require("../todo");
+
 const { all, markAsComplete, add, overdue, dueToday, dueLater } = todoList();
-describe("Todo test cases", () => {
+/* eslint-disable no-undef */
+describe("Todo List Test Suite", () => {
   beforeAll(() => {
+    // Seed the test data
     const today = new Date();
     const oneDay = 60 * 60 * 24 * 1000;
     [
       {
-        title: "Complete assignment",
+        title: "Buy milk",
         completed: false,
-        dueDate: new Date(today.getTime() - 1 * oneDay).toLocaleDateString(
+        dueDate: new Date(today.getTime() - 2 * oneDay).toLocaleDateString(
           "en-CA"
         ),
       },
       {
-        title: "Go for shopping",
+        title: "Pay rent",
         completed: false,
         dueDate: new Date().toLocaleDateString("en-CA"),
       },
       {
-        title: "Complete project",
+        title: "Submit assignment",
         completed: false,
-        dueDate: new Date(today.getTime() + 1 * oneDay).toLocaleDateString(
+        dueDate: new Date(today.getTime() + 2 * oneDay).toLocaleDateString(
           "en-CA"
         ),
       },
     ].forEach(add);
   });
-  test("Add new todo", () => {
+  test("Should add a new todo", () => {
     expect(all.length).toEqual(3);
 
     add({
-      title: "Take the test",
+      title: "A test item",
       completed: false,
       dueDate: new Date().toLocaleDateString("en-CA"),
     });
@@ -38,21 +42,21 @@ describe("Todo test cases", () => {
     expect(all.length).toEqual(4);
   });
 
-  test("Todo mark as complete", () => {
+  test("Should mark a todo as complete", () => {
     expect(all[0].completed).toEqual(false);
     markAsComplete(0);
     expect(all[0].completed).toEqual(true);
   });
 
-  test("Test for overdue", () => {
+  test("Should retrieve overdue items", () => {
     expect(overdue().length).toEqual(1);
   });
 
-  test("Test due today", () => {
+  test("Should retrieve due today items", () => {
     expect(dueToday().length).toEqual(2);
   });
 
-  test("Test for due later", () => {
+  test("Should retrieve due later items", () => {
     expect(dueLater().length).toEqual(1);
   });
 });

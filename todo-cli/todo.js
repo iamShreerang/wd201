@@ -1,37 +1,31 @@
-const todoList = () => {
-  all = [];
+// todo.js
+const todo_List = () => {
+  let all = [];
   const add = (todoItem) => {
     all.push(todoItem);
   };
-  const markAsComplete = (index) => {
+  const mark_As_Complete = (index) => {
     all[index].completed = true;
   };
 
   const overdue = () => {
     return all.filter(
-      (todo) => todo.dueDate < new Date().toLocaleDateString("en-CA")
+      (item) => item.dueDate < new Date().toLocaleDateString("en-CA")
     );
   };
 
-  const dueToday = () => {
+  const due_Today = () => {
     return all.filter(
-      (todo) => todo.dueDate === new Date().toLocaleDateString("en-CA")
+      (item) => item.dueDate === new Date().toLocaleDateString("en-CA")
     );
   };
 
-  const dueLater = () => {
+  const due_Later = () => {
     return all.filter(
-      (todo) => todo.dueDate > new Date().toLocaleDateString("en-CA")
+      (item) => item.dueDate > new Date().toLocaleDateString("en-CA")
     );
   };
-  return {
-    all,
-    add,
-    markAsComplete,
-    overdue,
-    dueToday,
-    dueLater,
-  };
+  return { all, add, mark_As_Complete, overdue, due_Today, due_Later };
 };
 
-module.exports = todoList;
+module.exports = todo_List;
