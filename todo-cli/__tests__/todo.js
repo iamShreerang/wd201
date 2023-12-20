@@ -4,62 +4,59 @@ let today = new Date().toLocaleDateString("en-CA");
 
 const { all, markAsComplete, add, overdue, dueToday, dueLater } = todoList();
 
-describe("Todolist Testing", () => {
+describe("A test that checks creating a new todo", () => {
   beforeAll(() => {
     add({
-      title: "DAA algorithums",
+      title: "test 1",
       completed: false,
       dueDate: new Date().toLocaleDateString("en-CA"),
     });
   });
-
-  test("Add a new todo in list", () => {
-    // expect(all.length).toBe(0);
-
-    let length = all.length;
-
+  test("Add new todo in todoList", () => {
+    const todoItemCount = all.length;
     add({
-      title: "node js learning",
+      title: "Test todo",
       completed: false,
       dueDate: new Date().toLocaleDateString("en-CA"),
     });
-
-    expect(all.length).toBe(length + 1);
+    expect(all.length).toBe(todoItemCount + 1);
   });
 
-  test("Mark todo as a completed", () => {
+  test("Checks marking a todo as completed", () => {
     expect(all[0].completed).toBe(false);
     markAsComplete(0);
     expect(all[0].completed).toBe(true);
   });
 
-  test("retrive all todos that are overdue", () => {
-    let listOfTodos = overdue();
+  test("Checks retrieval of overdue items", () => {
+    let overdueList = overdue();
 
     expect(
-      listOfTodos.every((todo) => {
-        return todo.dueDate < today;
+      overdueList.every((item) => {
+        return item.dueDate < today;
       })
     ).toBe(true);
   });
 
-  test("retrive all todos that are dueToday", () => {
-    let listOfTodos = dueToday();
+  test("Checks retrieval of due today items", () => {
+    let dueTodayList = dueToday();
 
     expect(
-      listOfTodos.every((todo) => {
-        return todo.dueDate === today;
+      dueTodayList.every((item) => {
+        return item.dueDate === today;
       })
     ).toBe(true);
   });
 
-  test("retrive all todos that are dueLater", () => {
-    let listOfTodos = dueLater();
+  test("Checks retrieval of due later items", () => {
+    let dueLaterList = dueLater();
 
     expect(
-      listOfTodos.every((todo) => {
-        return todo.dueDate > today;
+      dueLaterList.every((item) => {
+        return item.dueDate > today;
       })
     ).toBe(true);
   });
 });
+
+// npm run test : run command
